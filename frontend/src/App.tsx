@@ -1,21 +1,30 @@
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router";
-function Home() {
-  return (
-    <div>
-      <h1 className="text-blue-500">React Router DOM Setup</h1>
-    </div>
-  );
-}
+import AppLayout from "./layouts/app/AppLayout";
+import LandingPage from "./pages/general/LandingPage";
+import { authRoutes } from "./routes/auth/auth.route";
+import { homeRoutes } from "./routes/home/home.route";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: AppLayout,
+    children: [
+      {
+        index: true,
+        Component: LandingPage,
+      },
+      authRoutes,
+      homeRoutes,
+    ],
+  },
+]);
+
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      Component: Home,
-    },
-  ]);
   return (
     <div>
       <RouterProvider router={router} />
+      <Toaster position="bottom-right" />
     </div>
   );
 }
