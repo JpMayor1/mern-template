@@ -1,17 +1,14 @@
 // libraries
 import { Request, Response } from "express";
 import { v4 as uuid } from "uuid";
-
 // Models
 import Account from "@/models/account/account.model";
-
 // Services
 import {
   findAccountS,
   pushSessionS,
   registerS,
 } from "@/services/auth/auth.service";
-
 // Utils
 import { compareHashed, hashValue } from "@/utils/bcrypt/bcrypt.util";
 import {

@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 dotenv.config();
-
 // Libraries
 import expressMongoSanitize from "@exortek/express-mongo-sanitize";
 import cookieParser from "cookie-parser";
@@ -9,14 +8,11 @@ import express from "express";
 import helmet from "helmet";
 import http from "http";
 import morgan from "morgan";
-
 // Database
 import initDB from "@/db/db.connect.js";
-
 // Middlewares
 import { globalErrorHandler } from "@/middlewares/global-error-handler.middleware";
 import { globalRateLimiter } from "@/middlewares/limiter.middleware";
-
 // Routes
 import { authRouter } from "@/routes/auth/auth.route";
 import { tokenRouter } from "@/routes/token/token.route";
