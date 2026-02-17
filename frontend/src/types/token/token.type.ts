@@ -5,6 +5,6 @@ export type TokenStoreType = {
   loading: boolean;
 
   init: () => Promise<boolean>;
-  setToken: (token: string) => void;
+  setToken: (token: string | null) => void;
   setClearToken: () => void;
 };

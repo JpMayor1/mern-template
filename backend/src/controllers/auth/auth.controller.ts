@@ -8,7 +8,7 @@ import {
   findAccountS,
   pushSessionS,
   registerS,
-} from "@/services/auth/auth.service";
+} from "@/services/account/account.service";
 // Utils
 import { compareHashed, hashValue } from "@/utils/bcrypt/bcrypt.util";
 import {

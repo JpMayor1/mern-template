@@ -8,8 +8,11 @@ import {
 
 export const findAccountS = async (
   filter: AccountFilterType,
+  selectFields?: string,
 ): Promise<AccountDocumentType | null> => {
-  const account = await Account.findOne(filter).exec();
+  const account = await Account.findOne(filter)
+    .select(selectFields || "")
+    .exec();
   return account as AccountDocumentType | null;
 };
 
@@ -29,15 +32,8 @@ export const pushSessionS = async (accountId: string, session: SessionType) => {
   return Account.findByIdAndUpdate(
     accountId,
     { $push: { sessions: session } },
-    { new: true },
+    { returnDocument: "after", runValidators: true, lean: true },
   );
-};
-
-export const pullExpiredSessionsS = async (accountId: string) => {
-  return Account.updateOne(
-    { _id: accountId },
-    { $pull: { sessions: { expiresAt: { $lt: new Date() } } } },
-  ).exec();
 };
 
 export const registerS = async (data: Partial<AccountType>) => {

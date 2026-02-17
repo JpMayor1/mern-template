@@ -1,19 +1,16 @@
+import { findAccountS } from "@/services/account/account.service";
+import { AccountDocumentType } from "@/types/models/account.type";
 import { AppError } from "@/utils/error/app-error.util";
 import { verifyAccessToken } from "@/utils/jwt/jwt.util";
 import type { NextFunction, Request, Response } from "express";
 
-// Authenticated user payload
-type AuthUser = {
-  sub: string;
-};
-
-// Request extended with auth user
+// Request extended with account
 export interface AuthedRequest extends Request {
-  user?: AuthUser;
+  account?: AccountDocumentType | null;
 }
 
 // Validates access token from Authorization header
-export const requireAccessToken = (
+export const requireAccessToken = async (
   req: AuthedRequest,
   _res: Response,
   next: NextFunction,
@@ -28,7 +25,6 @@ export const requireAccessToken = (
 
   // Extract token
   const token = auth.slice("Bearer ".length).trim();
-
   try {
     // Verify token signature and expiry
     const payload = verifyAccessToken(token) as { sub: string };
@@ -38,8 +34,15 @@ export const requireAccessToken = (
       return next(new AppError("Unauthorized: Invalid access token.", 401));
     }
 
-    // Attach user to request
-    req.user = { sub: payload.sub };
+    // Get the account from db
+    const account = await findAccountS({ _id: payload.sub }, "email name");
+
+    if (!account) {
+      return next(new AppError("Unauthorized: Account not found.", 401));
+    }
+
+    // Attach account to request
+    req.account = account;
 
     // Continue request
     return next();

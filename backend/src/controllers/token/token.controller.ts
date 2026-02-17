@@ -7,7 +7,7 @@ import { SessionType } from "@/types/models/account.type";
 // Models
 import Account from "@/models/account/account.model";
 // Service
-import { pullExpiredSessionsS } from "@/services/auth/auth.service";
+import { pullExpiredSessionsS } from "@/services/token/token.service";
 // Utils
 import { compareHashed, hashValue } from "@/utils/bcrypt/bcrypt.util";
 import {
