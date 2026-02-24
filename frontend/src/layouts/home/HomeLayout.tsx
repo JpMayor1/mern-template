@@ -1,22 +1,25 @@
-// Libraries
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-// Stores
-import { useTokenStore } from "@/stores/token/token.store";
-// Components
 import Header from "@/components/header/Header";
+import { AnimatePresence, motion } from "framer-motion";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function HomeLayout() {
-  const accessToken = useTokenStore((s) => s.accessToken);
   const location = useLocation();
-
-  if (!accessToken) {
-    return <Navigate to="/" replace state={{ from: location.pathname }} />;
-  }
 
   return (
     <div className="h-dvh w-dvw bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       <Header />
-      <Outlet />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3 }}
+          className="flex-1"
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
