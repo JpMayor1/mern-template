@@ -118,7 +118,6 @@ backend/
   src/
     controllers/
     db/
-    routes/
     middlewares/
     models/
     routes/
@@ -130,9 +129,11 @@ backend/
 frontend/
   src/
     api/
+    assets/
     axios/
     components/
     layouts/
+    loaders/
     pages/
     routes/
     stores/
@@ -155,25 +156,25 @@ Name Example Required Description
 
 ---
 
-PORT 5000 Yes HTTP server port the backend runs on
+PORT 5000 - HTTP server port the backend runs on
 
-NODE_ENV development Yes Application environment (development | production)
+NODE_ENV development - Application environment (development | production)
 
-MONGO_DB_URI mongodb://127.0.0.1:27017/<project_name> Yes MongoDB connection string
+MONGO_DB_URI mongodb://127.0.0.1:27017/<project_name> - MongoDB connection string
 
-CORS_ORIGINS http://localhost:5173 Yes Comma-separated list of allowed frontend origins
+CORS_ORIGINS http://localhost:5173 - Comma-separated list of allowed frontend origins
 
-GLOBAL_RATE_LIMIT_MINUTES 15 No Rate limit time window in minutes
+GLOBAL_RATE_LIMIT_MINUTES 15 - Rate limit time window in minutes
 
-GLOBAL_RATE_LIMIT_MAX 100 No Maximum number of requests per window
+GLOBAL_RATE_LIMIT_MAX 100 - Maximum number of requests per window
 
-JWT_ACCESS_TOKEN value Yes Secret key used to sign access tokens
+JWT_ACCESS_TOKEN value - Secret key used to sign access tokens
 
-JWT_REFRESH_TOKEN value Yes Secret key used to sign refresh tokens
+JWT_REFRESH_TOKEN value - Secret key used to sign refresh tokens
 
-REFRESH_COOKIE_NAME value Yes Name of the httpOnly refresh token cookie
+REFRESH_COOKIE_NAME value - Name of the httpOnly refresh token cookie
 
-REFRESH_COOKIE_PATH value Yes Cookie path scope (e.g., /token/refresh)
+REFRESH_COOKIE_PATH value - Cookie path scope (e.g., /token/refresh)
 
 ---
 
